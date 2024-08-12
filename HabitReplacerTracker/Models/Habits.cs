@@ -1,4 +1,4 @@
-namespace HabitReplacerTracker;
+namespace HabitReplacerTracker.Models;
 
 public class Habits
 {

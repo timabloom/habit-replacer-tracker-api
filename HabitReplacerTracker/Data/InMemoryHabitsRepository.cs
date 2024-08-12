@@ -1,3 +1,5 @@
+using HabitReplacerTracker.Models;
+
 namespace HabitReplacerTracker.Data;
 
 public class InMemoryHabitsRepository : IHabitsRepository

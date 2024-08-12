@@ -1,4 +1,6 @@
-using HabitReplacerTracker;
+using HabitReplacerTracker.Models;
+
+namespace HabitReplacerTracker.Data;
 
 public interface IHabitsRepository
 {
