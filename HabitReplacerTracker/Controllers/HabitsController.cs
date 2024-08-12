@@ -1,3 +1,4 @@
+using HabitReplacerTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HabitReplacerTracker.Controllers;
@@ -14,4 +15,11 @@ public class HabitsController : ControllerBase
 
     [HttpGet]
     public Habits GetHabits() => _repo.GetAllHabits();
+
+    [HttpPost]
+    public Habits PostHabit(AddHabitRequest habitData)
+    {
+        var habits = _repo.AddHabit(habitData.Id, habitData.Name, habitData.Description, habitData.TimeSpent);
+        return habits;
+    }
 }

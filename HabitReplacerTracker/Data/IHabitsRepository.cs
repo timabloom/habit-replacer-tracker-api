@@ -3,6 +3,6 @@ using HabitReplacerTracker;
 public interface IHabitsRepository
 {
     public Habits GetAllHabits();
-    public Habits AddHabit();
-    public Habits AddHabitActivity();
+    public Habits AddHabit(string id, string name, string description, List<TimeSpent> timeSpent);
+    public Habits AddHabitActivity(string id, string date, int minutes);
 }
