@@ -20,7 +20,7 @@ public class HabitsController : ControllerBase
     [Route("new")]
     public Habits PostNewHabit(AddHabitRequest habitData)
     {
-        var habits = _repo.AddHabit("new", habitData.Id, habitData.Name, habitData.Description);
+        var habits = _repo.AddHabit("new", habitData.Name, habitData.Description);
         return habits;
     }
 
@@ -28,7 +28,7 @@ public class HabitsController : ControllerBase
     [Route("old")]
     public Habits PostOldHabit(AddHabitRequest habitData)
     {
-        var habits = _repo.AddHabit("old", habitData.Id, habitData.Name, habitData.Description);
+        var habits = _repo.AddHabit("old", habitData.Name, habitData.Description);
         return habits;
     }
 

@@ -6,11 +6,11 @@ public class InMemoryHabitsRepository : IHabitsRepository
 
     public Habits GetAllHabits() => _repo;
 
-    public Habits AddHabit(string habitType, string id, string name, string description)
+    public Habits AddHabit(string habitType, string name, string description)
     {
         var habit = new Habit
         {
-            Id = id,
+            Id = Guid.NewGuid().ToString(),
             Name = name,
             Description = description
         };
@@ -29,7 +29,7 @@ public class InMemoryHabitsRepository : IHabitsRepository
     {
         var activity = new TimeSpent
         {
-            Id = id,
+            Id = Guid.NewGuid().ToString(),
             Date = date,
             Minutes = minutes
         };
