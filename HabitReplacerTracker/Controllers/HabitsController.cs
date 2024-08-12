@@ -28,10 +28,10 @@ public class HabitsController : ControllerBase
 
     [HttpPost]
     [Route("old")]
-    public Habit? PostOldHabit(AddHabitRequest habitData)
+    public Habit PostOldHabit(AddHabitRequest habitData)
     {
-        var habits = _repo.AddHabit("old", habitData.Name, habitData.Description);
-        return habits;
+        var habit = _repo.AddHabit("old", habitData.Name, habitData.Description);
+        return habit;
     }
 
     [HttpPut("{id}")]
