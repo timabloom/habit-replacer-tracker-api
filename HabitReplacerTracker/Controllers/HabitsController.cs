@@ -22,22 +22,29 @@ public class HabitsController : ControllerBase
     public ActionResult<Habit> PostNewHabit(AddHabitRequest habitData)
     {
         var habit = _repo.AddHabit("new", habitData.Name, habitData.Description);
-        return habit; 
-        
+        return habit;
+
     }
 
     [HttpPost]
     [Route("old")]
-    public Habit PostOldHabit(AddHabitRequest habitData)
+    public ActionResult<Habit> PostOldHabit(AddHabitRequest habitData)
     {
         var habit = _repo.AddHabit("old", habitData.Name, habitData.Description);
         return habit;
     }
 
     [HttpPut("{id}")]
-    public Habits PostActivity(string id, AddActivityRequest activityData)
+    public ActionResult<TimeSpent> PostActivity(string id, AddActivityRequest activityData)
     {
-        var habits = _repo.AddHabitActivity(id, activityData.Date, activityData.Minutes);
-        return habits;
+        try
+        {
+            var timeSpent = _repo.AddHabitActivity(id, activityData.Date, activityData.Minutes);
+            return timeSpent;
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound();
+        }
     }
 }

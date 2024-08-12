@@ -8,7 +8,7 @@ public class InMemoryHabitsRepository : IHabitsRepository
 
     public Habits GetAllHabits() => _repo;
 
-    public Habit AddHabit(string habitType, string name, string description)
+    public Habit AddHabit(string habitType, string name, string? description)
     {
         var habit = new Habit
         {
@@ -20,17 +20,17 @@ public class InMemoryHabitsRepository : IHabitsRepository
         {
             _repo.NewHabits.Add(habit);
 
-        return GetAllHabits().NewHabits.FirstOrDefault(item => item.Id == habit.Id)!;
+            return GetAllHabits().NewHabits.FirstOrDefault(item => item.Id == habit.Id)!;
         }
         else
         {
             _repo.OldHabits.Add(habit);
 
-        return GetAllHabits().OldHabits.FirstOrDefault(item => item.Id == habit.Id)!;
+            return GetAllHabits().OldHabits.FirstOrDefault(item => item.Id == habit.Id)!;
         }
     }
 
-    public Habits AddHabitActivity(string id, string date, int minutes)
+    public TimeSpent AddHabitActivity(string id, string date, int minutes)
     {
         var activity = new TimeSpent
         {
@@ -39,11 +39,21 @@ public class InMemoryHabitsRepository : IHabitsRepository
             Minutes = minutes
         };
 
-        var habit = _repo.NewHabits.FirstOrDefault(habit => habit.Id == id);
-        if (habit != null)
+        var newHabit = _repo.NewHabits.FirstOrDefault(habit => habit.Id == id);
+        if (newHabit != null)
         {
-            habit.TimeSpent.Add(activity);
+            newHabit.TimeSpent.Add(activity);
+            var timeSpentNewHabit = newHabit.TimeSpent.FirstOrDefault(item => item.Id == activity.Id);
+            return timeSpentNewHabit!;
         }
-        return GetAllHabits();
+        var oldHabit = _repo.OldHabits.FirstOrDefault(habit => habit.Id == id);
+        if (oldHabit != null)
+        {
+            oldHabit.TimeSpent.Add(activity);
+            var timeSpentOldHabit = oldHabit.TimeSpent.FirstOrDefault(item => item.Id == activity.Id);
+            return timeSpentOldHabit!;
+        }
+
+        throw new KeyNotFoundException($"Habit with {id} not found");
     }
 }
