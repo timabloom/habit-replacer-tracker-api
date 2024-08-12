@@ -31,4 +31,11 @@ public class HabitsController : ControllerBase
         var habits = _repo.AddHabit("old", habitData.Id, habitData.Name, habitData.Description, habitData.TimeSpent);
         return habits;
     }
+
+    [HttpPut("{id}")]
+    public Habits PostActivity(string id, AddActivityRequest activityData)
+    {
+        var habits = _repo.AddHabitActivity(id, activityData.Date, activityData.Minutes);
+        return habits;
+    }
 }

@@ -28,6 +28,18 @@ public class InMemoryHabitsRepository : IHabitsRepository
 
     public Habits AddHabitActivity(string id, string date, int minutes)
     {
-        throw new NotImplementedException();
+        var activity = new TimeSpent
+        {
+            Id = id,
+            Date = date,
+            Minutes = minutes
+        };
+
+        var habit = _repo.NewHabits.FirstOrDefault(habit => habit.Id == id);
+        if (habit != null)
+        {
+            habit.TimeSpent.Add(activity);
+        }
+        return GetAllHabits();
     }
 }
