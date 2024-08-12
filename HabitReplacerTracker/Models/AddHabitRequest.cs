@@ -8,8 +8,7 @@ public record AddHabitRequest(
     string Id,
     [Required]
     string Name,
-    string? Description,
-    List<TimeSpent>? TimeSpent
+    string? Description
 );
 
 

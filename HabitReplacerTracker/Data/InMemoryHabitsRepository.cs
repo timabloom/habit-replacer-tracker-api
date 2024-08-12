@@ -6,14 +6,13 @@ public class InMemoryHabitsRepository : IHabitsRepository
 
     public Habits GetAllHabits() => _repo;
 
-    public Habits AddHabit(string habitType, string id, string name, string description, List<TimeSpent> timeSpent)
+    public Habits AddHabit(string habitType, string id, string name, string description)
     {
         var habit = new Habit
         {
             Id = id,
             Name = name,
-            Description = description,
-            TimeSpent = timeSpent
+            Description = description
         };
         if (habitType == "new")
         {
