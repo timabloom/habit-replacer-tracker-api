@@ -6,7 +6,7 @@ public class InMemoryHabitsRepository : IHabitsRepository
 
     public Habits GetAllHabits() => _repo;
 
-    public Habits AddHabit(string id, string name, string description, List<TimeSpent> timeSpent)
+    public Habits AddHabit(string habitType, string id, string name, string description, List<TimeSpent> timeSpent)
     {
         var habit = new Habit
         {
@@ -15,8 +15,15 @@ public class InMemoryHabitsRepository : IHabitsRepository
             Description = description,
             TimeSpent = timeSpent
         };
-        _repo.NewHabits.Add(habit);
-        return _repo;
+        if (habitType == "new")
+        {
+            _repo.NewHabits.Add(habit);
+        }
+        else
+        {
+            _repo.OldHabits.Add(habit);
+        }
+        return GetAllHabits();
     }
 
     public Habits AddHabitActivity(string id, string date, int minutes)

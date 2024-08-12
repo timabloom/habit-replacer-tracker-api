@@ -17,9 +17,18 @@ public class HabitsController : ControllerBase
     public Habits GetHabits() => _repo.GetAllHabits();
 
     [HttpPost]
-    public Habits PostHabit(AddHabitRequest habitData)
+    [Route("new")]
+    public Habits PostNewHabit(AddHabitRequest habitData)
     {
-        var habits = _repo.AddHabit(habitData.Id, habitData.Name, habitData.Description, habitData.TimeSpent);
+        var habits = _repo.AddHabit("new", habitData.Id, habitData.Name, habitData.Description, habitData.TimeSpent);
+        return habits;
+    }
+
+    [HttpPost]
+    [Route("old")]
+    public Habits PostOldHabit(AddHabitRequest habitData)
+    {
+        var habits = _repo.AddHabit("old", habitData.Id, habitData.Name, habitData.Description, habitData.TimeSpent);
         return habits;
     }
 }
