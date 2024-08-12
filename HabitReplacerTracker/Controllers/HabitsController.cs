@@ -19,15 +19,16 @@ public class HabitsController : ControllerBase
 
     [HttpPost]
     [Route("new")]
-    public Habits PostNewHabit(AddHabitRequest habitData)
+    public ActionResult<Habit> PostNewHabit(AddHabitRequest habitData)
     {
-        var habits = _repo.AddHabit("new", habitData.Name, habitData.Description);
-        return habits;
+        var habit = _repo.AddHabit("new", habitData.Name, habitData.Description);
+        return habit; 
+        
     }
 
     [HttpPost]
     [Route("old")]
-    public Habits PostOldHabit(AddHabitRequest habitData)
+    public Habit? PostOldHabit(AddHabitRequest habitData)
     {
         var habits = _repo.AddHabit("old", habitData.Name, habitData.Description);
         return habits;

@@ -8,7 +8,7 @@ public class InMemoryHabitsRepository : IHabitsRepository
 
     public Habits GetAllHabits() => _repo;
 
-    public Habits AddHabit(string habitType, string name, string description)
+    public Habit AddHabit(string habitType, string name, string description)
     {
         var habit = new Habit
         {
@@ -19,12 +19,15 @@ public class InMemoryHabitsRepository : IHabitsRepository
         if (habitType == "new")
         {
             _repo.NewHabits.Add(habit);
+
+        return GetAllHabits().NewHabits.FirstOrDefault(item => item.Id == habit.Id)!;
         }
         else
         {
             _repo.OldHabits.Add(habit);
+
+        return GetAllHabits().OldHabits.FirstOrDefault(item => item.Id == habit.Id)!;
         }
-        return GetAllHabits();
     }
 
     public Habits AddHabitActivity(string id, string date, int minutes)
