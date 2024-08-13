@@ -8,7 +8,7 @@ public class Habits
 
 public class Habit
 {
-    public required string Id { get; set; }
+    public required string Id { get; init; }
     public required string Name { get; set; }
     public string? Description { get; set; }
     public List<TimeSpent> TimeSpent { get; set; } = [];
@@ -16,7 +16,7 @@ public class Habit
 
 public class TimeSpent
 {
-    public required string Id { get; set; }
-    public required string Date { get; set; }
-    public required int Minutes { get; set; }
+    public required string Id { get; init; }
+    public required string Date { get; init; }
+    public required int Minutes { get; init; }
 }
